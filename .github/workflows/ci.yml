@@ -42,7 +42,7 @@ jobs:
       - name: Update image tags in infra repo
         uses: actions/checkout@v3
         with:
-          repository: omkark158/ai-task-platform-infra
+          repository: omkark158/Infra
           token: ${{ secrets.GH_PAT }}
           path: infra
 

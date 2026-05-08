@@ -1,0 +1,22 @@
+# Node
+node_modules/
+npm-debug.log
+.npm
+
+# Python
+__pycache__/
+*.pyc
+*.pyo
+worker/__pycache__/
+worker/*.pyc
+
+# Environment
+.env
+.env.local
+
+# Build
+frontend/dist/
+frontend/build/
+
+# Docker
+*.log

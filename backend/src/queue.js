@@ -5,6 +5,7 @@ const redis = new Redis({
   host: process.env.REDIS_HOST,
   port: parseInt(process.env.REDIS_PORT),
   password: process.env.REDIS_PASSWORD,
+  tls: process.env.REDIS_SSL === 'true' ? {} : undefined,
   lazyConnect: true,
   retryStrategy: (times) => {
     if (times > 3) return null;

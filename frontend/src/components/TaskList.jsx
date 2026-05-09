@@ -14,12 +14,15 @@ export default function TaskList({ refresh }) {
   const [selected, setSelected] = useState(null)
 
   const fetchTasks = async () => {
-    const { data } = await api.get('/tasks')
-    setTasks(data)
-    // update selected task if it exists
-    if (selected) {
-      const updated = data.find(t => t._id === selected._id)
-      if (updated) setSelected(updated)
+    try {
+      const { data } = await api.get('/tasks')
+      setTasks(data)
+      if (selected) {
+        const updated = data.find(t => t._id === selected._id)
+        if (updated) setSelected(updated)
+      }
+    } catch (err) {
+      console.error('Failed to fetch tasks:', err.message)
     }
   }
 
@@ -28,9 +31,12 @@ export default function TaskList({ refresh }) {
   }, [refresh])
 
   useEffect(() => {
-    const interval = setInterval(fetchTasks, 1000)
+    const interval = setInterval(() => {
+      const hasActive = tasks.some(t => t.status === 'pending' || t.status === 'running')
+      if (hasActive) fetchTasks()
+    }, 4000)
     return () => clearInterval(interval)
-  }, [selected])
+  }, [tasks])
 
   return (
     <div>

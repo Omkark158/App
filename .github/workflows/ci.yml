@@ -5,9 +5,32 @@ on:
     branches: [main]
 
 jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v3
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: '20'
+
+      - name: Lint backend
+        run: |
+          cd backend
+          npm install
+          npm run lint
+
+      - name: Lint frontend
+        run: |
+          cd frontend
+          npm install
+          npm run lint
+
   build-and-push:
     runs-on: ubuntu-latest
-
+    needs: lint
     steps:
       - name: Checkout code
         uses: actions/checkout@v3
@@ -42,7 +65,7 @@ jobs:
       - name: Update image tags in infra repo
         uses: actions/checkout@v3
         with:
-          repository: omkark158/Infra
+          repository: Omkark158/Infra
           token: ${{ secrets.GH_PAT }}
           path: infra
 

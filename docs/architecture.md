@@ -17,6 +17,20 @@ MongoDB Atlas (update result)
 
 ---
 
+## Security Measures
+
+**Password Hashing (bcrypt):** All user passwords are hashed using bcrypt with a salt rounds factor of 10 before storing in MongoDB. Plain-text passwords are never stored or logged.
+
+**JWT Authentication:** All protected API endpoints require a valid JSON Web Token. Tokens are signed with a secret key, expire after 7 days, and are verified on every request using middleware.
+
+**Helmet Middleware:** The Express backend uses Helmet.js which sets security-related HTTP headers to protect against common web vulnerabilities like XSS and clickjacking.
+
+**Rate Limiting:** Authentication endpoints are limited to 20 requests per 15 minutes per IP to prevent brute force attacks. API endpoints are limited to 100 requests per 15 minutes per IP.
+
+**No Hardcoded Secrets:** All sensitive values (MongoDB URI, Redis password, JWT secret) are stored in environment variables and Kubernetes Secrets. Repository contains only placeholder values.
+
+---
+
 ## 1. Worker Scaling Strategy
 
 Workers are stateless and use Redis `BLPOP` — atomic blocking pop ensures 

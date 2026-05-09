@@ -84,3 +84,6 @@ GitHub Actions automatically:
 
 ## Architecture
 See [Architecture Document](docs/AI_Task_Platform_Architecture_Document.pdf)
+
+## ArgoCD Dashboard
+![ArgoCD Dashboard](docs/argocd.png)

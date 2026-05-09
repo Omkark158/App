@@ -83,4 +83,4 @@ GitHub Actions automatically:
 5. ArgoCD auto-syncs to Kubernetes
 
 ## Architecture
-See [docs/architecture.md](docs/architecture.md)
+See [Architecture Document](docs/AI_Task_Platform_Architecture_Document.pdf)
